@@ -1,0 +1,440 @@
+/* ============================================================
+   Symufolk landing page — global styles
+   Palette + type tokens, keyframes, reveal, hover & responsive.
+   ============================================================ */
+
+:root {
+  --green: #00e6a3;
+  --green-dark: #00c48c;
+  --ink: #0b1533;
+  --bg: #1f1f1f;
+  --bg-dark: #161616;
+  --bg-darker: #111111;
+  --panel: #262626;
+  --panel-2: #1a1a1a;
+  --text: #ededed;
+  --muted: #b0b0b0;
+  --muted-2: #8a8a8a;
+  --maxw: 1240px;
+  --display: 'Bricolage Grotesque', sans-serif;
+  --body: 'Hanken Grotesk', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--green);
+  color: #fff;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.display {
+  font-family: var(--display);
+}
+
+/* ---------- Layout helpers ---------- */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+.section-pad {
+  padding-top: clamp(80px, 9vw, 130px);
+  padding-bottom: clamp(80px, 9vw, 130px);
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.grid {
+  display: grid;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+@keyframes marq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Email CTA fallback toast ---------- */
+.email-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 12px);
+  background: #1F1F1F;
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+  max-width: min(90vw, 420px);
+  text-align: center;
+}
+.email-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Hover interactions (mirror original style-hover) ---------- */
+.nav-link {
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: var(--green);
+}
+
+.btn-primary {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background 0.22s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: var(--green-dark);
+  box-shadow: 0 20px 40px rgba(0, 230, 163, 0.34);
+}
+.btn-pill:hover {
+  transform: translateY(-2px);
+  background: var(--green-dark);
+  box-shadow: 0 12px 26px rgba(0, 230, 163, 0.45);
+}
+
+.card-lift {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 34px 66px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 230, 163, 0.35),
+    0 18px 60px rgba(0, 230, 163, 0.28);
+  border-color: rgba(0, 230, 163, 0.7);
+}
+
+.method-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+.method-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 34px 66px rgba(0, 0, 0, 0.16);
+  border-color: rgba(0, 230, 163, 0.55);
+}
+
+.problem-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.problem-card:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+.guarantee-row {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.guarantee-row:hover {
+  transform: translateX(8px);
+  border-color: rgba(0, 230, 163, 0.5);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12);
+}
+
+.about-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.35s ease;
+}
+.about-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.28);
+}
+
+.service-tile {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+.service-tile:hover {
+  background: #2e2e2e;
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.13);
+  z-index: 2;
+}
+
+.testimonial-card {
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--green);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.25);
+}
+
+.process-card {
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+.process-card:hover {
+  transform: translateY(-6px);
+  background: var(--panel);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.12);
+}
+
+.price-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.price-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+}
+
+.price-btn-ghost {
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.25s;
+}
+.price-btn-ghost:hover {
+  background: rgba(0, 230, 163, 0.16);
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+.price-btn-solid {
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s;
+}
+.price-btn-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 230, 163, 0.5);
+}
+
+.faq-item {
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+.faq-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.faq-item summary {
+  list-style: none;
+}
+.faq-item .faq-sign {
+  transition: transform 0.3s ease;
+}
+.faq-item[open] .faq-sign {
+  transform: rotate(180deg);
+}
+
+.footer-link {
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: var(--green);
+}
+
+.marquee-track {
+  animation: marq 32s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------- Language pills ---------- */
+.lang-btn {
+  border: none;
+  background: transparent;
+  color: var(--muted-2);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lang-btn.active {
+  background: var(--green);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 960px) {
+  .hero-grid,
+  .about-grid,
+  .problem-grid,
+  .guarantee-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-3,
+  .grid-4,
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .hero-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .grid-2,
+  .grid-3,
+  .grid-4,
+  .services-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .price-featured {
+    transform: none !important;
+  }
+  .header-actions .btn-pill {
+    display: none !important;
+  }
+}
