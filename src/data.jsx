@@ -269,3 +269,5 @@ export const supportEmail = 'info@symufolk.com'
 
 export const emailHref =
   "mailto:info@symufolk.com?subject=Free%2030-Minute%20Growth%20Audit&body=Hi%20Symufolk%20team%2C%0A%0AI'd%20like%20to%20book%20my%20free%2030-minute%20growth%20audit.%0A%0ABusiness%20name%3A%0AWebsite%3A%0ACity%3A%0APhone%3A%0A%0AThanks!"
+
+export const auditEmailHref = 'mailto:info@symufolk.com?subject=Free%2030-Minute%20Audit%20Request'

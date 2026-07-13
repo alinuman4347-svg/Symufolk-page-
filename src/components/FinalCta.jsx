@@ -1,9 +1,8 @@
-import { T, TReveal, useLang } from '../i18n.jsx'
-import { Reveal, useParallax, showEmailToast } from '../hooks.jsx'
-import { emailHref, supportEmail } from '../data.jsx'
+import { T, TReveal } from '../i18n.jsx'
+import { Reveal, useParallax } from '../hooks.jsx'
+import { auditEmailHref } from '../data.jsx'
 
 export default function FinalCta() {
-  const { t } = useLang()
   const blob = useParallax(0.06)
   return (
     <section
@@ -62,8 +61,7 @@ export default function FinalCta() {
           <T
             as="a"
             k="cta_btn"
-            href={emailHref}
-            onClick={() => showEmailToast(t('cta_toast'), supportEmail)}
+            href={auditEmailHref}
             className="btn-primary"
             style={{
               display: 'inline-flex',
